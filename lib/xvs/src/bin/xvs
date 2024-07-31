@@ -1,1 +1,11 @@
-#! /usr/bin/env bash
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p bash -p gnumake -p peru
+
+set -e
+set -u
+
+__XVS_SYSTEM_BUILDER_PATH="$(which make)"
+__XVS_SYSTEM_RUNTIME_TARGET="universe"
+__XVS_SYSTEM_BUILDER_PROGRAM_PATH="${__XVS_PROJECT_PATH}/Makefile"
+echo 'Running'
+exec "${__XVS_SYSTEM_BUILDER_PATH}" -s -f "${__XVS_SYSTEM_BUILDER_PROGRAM_PATH}" -C "${__XVS_PROJECT_PATH}" "${__XVS_SYSTEM_RUNTIME_TARGET}"

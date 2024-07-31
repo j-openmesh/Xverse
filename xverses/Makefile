@@ -1,4 +1,4 @@
-TARGETS = components
+TARGETS = prime
 
 .PHONY: build clean setup
 

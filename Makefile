@@ -1,11 +1,11 @@
-TARGETS = docs sys
+TARGETS = docs xverses
 MAKEFLAGS =? -s
 .PHONY = $(TARGETS) setup usage clean
 
 usage:
 	@$(MAKE) $(MFLAGS) -C docs usage
 
-universe: build
+universe: clean setup build
 
 $(TARGETS):
 	@$(MAKE) $(MFLAGS) -C $@
