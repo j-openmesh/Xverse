@@ -20,7 +20,7 @@
         * `FQTN`
     * `ANCESTORS`
       * `PARENTS`
-        * `{FQTN_ROLE}`
+        * `{FQTN_ASPECT}`
           * `NAME`
           * `SCOPE`
           * `FQTN`
@@ -30,8 +30,8 @@
         * `version`
       * `README.md`
       * `Makefile`
-      * `roles/`
-        * `{role name}[.{type}[.]]/` -> `Role definition (direct or symbolic link)`
+      * `aspects/`
+        * `{aspects name}[.{type}[.]]/` -> `Aspect definition (direct or symbolic link)`
         * `[...]`
       * `definition/`
         * `.metadata/`
@@ -51,7 +51,7 @@
   * Canonical Environment Closure Definitions (in `__SH_OPNM_XVS_V0_ENV_PORT_`)
     * `SELF`
       * `NAME`
-      * `ROLE`
+      * `aspect`
       * `SCOPE`
       * `FQTN`
       * `TYPE`
@@ -60,18 +60,18 @@
         * `FQTN`
     * `ANCESTORS`
       * `PARENTS`
-        * `{FQTN_ROLE}`
+        * `{FQTN_ASPECT}`
           * `NAME`
           * `SCOPE`
           * `FQTN`
   * Schema (Prototype):
-    * `{name}:[role.{type}[.],...]:[.{type}[.]}/`
+    * `{name}:[aspect.{type}[.],...]:[.{type}[.]}/`
       * `.metadata/`
         * `version`
       * `README.md`
       * `Makefile`
-      * `roles/`
-        * `{role name}[.{type}[.]]/` -> `Role definition (direct or symbolic link)`
+      * `aspects/`
+        * `{aspect name}[.{type}[.]]/` -> `Aspect definition (direct or symbolic link)`
         * `[...]`
       * `definition/`
         * `.metadata/`
@@ -100,7 +100,7 @@
         * `FQTN`
     * `ANCESTORS`
       * `PARENTS`
-        * `[FQTN_ROLE]`
+        * `[FQTN_ASPECT]`
           * `NAME`
           * `SCOPE`
           * `FQTN`
@@ -110,8 +110,8 @@
         * `version`
       * `README.md`
       * `Makefile`
-      * `roles/`
-        * `{role name}[.{type}[.]]/` -> `Role definition (direct or symbolic link)`
+      * `aspects/`
+        * `{aspect name}[.{type}[.]]/` -> `aspect definition (direct or symbolic link)`
         * `[...]`
       * `definition/`
         * `.metadata/`
