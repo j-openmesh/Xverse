@@ -1,3 +1,0 @@
-## Openmesh Xverse Library
-
-### Components

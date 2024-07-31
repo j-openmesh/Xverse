@@ -1,17 +1,9 @@
-TARGETS = docs sys
-MAKEFLAGS =? -s
-.PHONY = $(TARGETS) setup usage clean
+TARGETS = xvs
 
-usage:
-	@$(MAKE) $(MFLAGS) -C docs usage
-
-universe: build
+.PHONY: build clean setup
 
 $(TARGETS):
 	@$(MAKE) $(MFLAGS) -C $@
-
-bin: src
-src: lib
 
 $(foreach TARGET,$(TARGETS),$(TARGET)-build):
 	@$(MAKE) $(MFLAGS) -C $(subst -build,,$@) build
@@ -22,11 +14,8 @@ $(foreach TARGET,$(TARGETS),$(TARGET)-clean):
 $(foreach TARGET,$(TARGETS),$(TARGET)-setup):
 	@$(MAKE) $(MFLAGS) -C $(subst -setup,,$@) setup
 
-build: setup $(foreach TARGET,$(TARGETS),$(TARGET)-build)
-	$(info Build complete.)
+build: $(foreach TARGET,$(TARGETS),$(TARGET)-build)
 
 clean: $(foreach TARGET,$(TARGETS),$(TARGET)-clean)
-	$(info Clean complete.)
 
 setup: $(foreach TARGET,$(TARGETS),$(TARGET)-setup)
-	$(info Setup complete.)
