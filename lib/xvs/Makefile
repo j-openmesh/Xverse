@@ -1,6 +1,6 @@
 .PHONY: default clean bootstrap
 
-default: clean bootstrap
+default: rebootstrap
 
 clean:
 	@rm -rf out
@@ -11,8 +11,10 @@ out:
 out/bin: out
 	@mkdir out/bin
 
-out/bin/xvs: out/bin
-	@cp src/bin/xvs.sh out/bin/xvs
+src/bin/xvs: out/bin
+	@cp src/bin/xvs out/bin/xvs
 	@chmod +x out/bin/xvs
 
-bootstrap: out/bin/xvs
+bootstrap: src/bin/xvs
+
+rebootstrap: clean bootstrap
