@@ -3,7 +3,7 @@
 
 set -e
 set -u
-set -x
+
 __XVS_SYSTEM_BUILDER_PATH="$(which make)"
 __XVS_SYSTEM_RUNTIME_TARGET="universe"
 __XVS_SYSTEM_BUILDER_PROGRAM_PATH="${__XVERSE_PROJECT_PATH}/Makefile"
