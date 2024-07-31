@@ -9,7 +9,7 @@
     * Progenitor
       * That from which every other Components in any particular Xverse descend, transitively.
       * Its parent is always a Xverse containing no components.
-  * Canonical Environment Closure Definitions (in `__SH_OPNM_XVS_V0_ENV_COMPONENT_`)
+  * Canonical Environment Closure Definitions (in `__SH_OPNM_XVERSE_V0_ENV_COMPONENT_`)
     * `SELF`
       * `NAME`
       * `SCOPE`
@@ -28,8 +28,15 @@
     * `{name}[.{type}[.]}/`
       * `.metadata/`
         * `version`
+      * `.xverse/`
+        * `.metadata/`
+          * `version`
+        * `xvs/`
+          * `.metadata/`
+            * `version`
+          * `commands/`
+            * `new.makefile`
       * `README.md`
-      * `Makefile`
       * `aspects/`
         * `{aspects name}[.{type}[.]]/` -> `Aspect definition (direct or symbolic link)`
         * `[...]`
@@ -48,7 +55,7 @@
   * Definitions and Constraints
     * A point of Connection either provided or consumed by a particular Component
     * Progenitor
-  * Canonical Environment Closure Definitions (in `__SH_OPNM_XVS_V0_ENV_PORT_`)
+  * Canonical Environment Closure Definitions (in `__SH_OPNM_XVERSE_V0_ENV_PORT_`)
     * `SELF`
       * `NAME`
       * `aspect`
@@ -68,8 +75,15 @@
     * `{name}:[aspect.{type}[.],...]:[.{type}[.]}/`
       * `.metadata/`
         * `version`
-      * `README.md`
-      * `Makefile`
+      * `.xverse/`
+        * `.metadata/`
+          * `version`
+        * `xvs/`
+          * `.metadata/`
+            * `version`
+          * `commands/`
+            * `new.makefile`
+      * `README.md` 
       * `aspects/`
         * `{aspect name}[.{type}[.]]/` -> `Aspect definition (direct or symbolic link)`
         * `[...]`
@@ -89,7 +103,7 @@
       * Its parent is always a Xverse containing no Connections and at least one Component which exposes at least one
         Port and at least one Component which imports one Port.
       * Every Connection must have at least one Port
-  * Canonical Environment Closure Definitions (in `__SH_OPNM_XVS_V0_ENV_CONNECTION_`)
+  * Canonical Environment Closure Definitions (in `__SH_OPNM_XVERSE_V0_ENV_CONNECTION_`)
     * `SELF`
       * `NAME`
       * `SCOPE`
@@ -108,8 +122,16 @@
     * `{name}[.{type}[.]]/`
       * `.metadata/`
         * `version`
+      * `.xverse/`
+        * `.metadata/`
+          * `version`
+        * `xvs/`
+          * `.metadata/`
+            * `version`
+          * `commands/`
+            * `new`
       * `README.md`
-      * `Makefile`
+      * `.makefile`
       * `aspects/`
         * `{aspect name}[.{type}[.]]/` -> `aspect definition (direct or symbolic link)`
         * `[...]`
