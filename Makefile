@@ -10,9 +10,6 @@ universe: clean setup build
 $(TARGETS):
 	@$(MAKE) $(MFLAGS) -C $@
 
-bin: src
-src: lib
-
 $(foreach TARGET,$(TARGETS),$(TARGET)-build):
 	@$(MAKE) $(MFLAGS) -C $(subst -build,,$@) build
 
