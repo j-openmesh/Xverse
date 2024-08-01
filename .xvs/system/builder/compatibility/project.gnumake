@@ -1,3 +1,8 @@
+##
+# THIS IS AN AUTOMATICALLY GENERATED FILE CREATED BY ./configure
+# THE FILE SOURCE IS ./.xvs/system/builder/compatibility/project.gnumake
+# MAKE CHANGES IN THAT FILE AND RU-RUN ./configure
+##
 TARGETS = docs xverses
 MAKEFLAGS =? -s
 .PHONY = $(TARGETS) setup usage clean

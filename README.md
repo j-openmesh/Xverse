@@ -12,21 +12,19 @@ destroy your entire machine on a whim. Here be dragons. Take caution. Caveat emp
 without any warranty or guarantee. Etc, etc. Basically: unless you understand what you see when
 you look at random files in this project, you'll probably want to avoid it - for now.
 
-### Quick Start
+### Getting Started
 
 #### Prerequisites
 
-* Any Linux distirbution (any distribution released within the last few years should do).
-* GNU, or compatible, make.
-* A working, up to date, single or multi-user Nix installation with the `flakes` and `nix-command`
-  features enabled.
+* Any Linux distirbution (any distribution released within the last few years should do)
+* A POSIX-Compatible Shell Implementation (tested with Bash >4)
 
 #### Setup
 
-* Clone the repository or download a recent release.
-* Ensure your working directory is at the root directory of the project repository.
-* Execute `make setup`.
+* Clone the repository or download a recent release
+* Ensure your working directory is at the root directory of the project repository
+* Run `./xvs quickstart` and the program will be provide further instruction
 
 #### Usage
 
-  To display usage documentation, execute `make usage`.
+  To display documentation about how to use Xverse, execute `./xvs help`
