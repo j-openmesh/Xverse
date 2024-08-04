@@ -14,10 +14,26 @@ you look at random files in this project, you'll probably want to avoid it - for
 
 ### Getting Started
 
-#### Prerequisites
+#### Requirements
 
-* Any Linux distribution with Linux Version >. 
-* Any POSIX-Compatible (POSIX.1-2017) Shell Implementation (tested with Bash >=4.1)
+* Internet Access (Unrestricted, Continuous) for on-demand component/dependency downloads
+  * If required, execute `./xvs help system offline` for the steps to remove this requirement. Note that significant 
+    bandwidth and storage required are required to enable fully offline mode.
+* Hardware
+  * Minimum Requirements
+    * 8GiB RAM
+    * 64GiB NVME/SSD Mass Storage
+    * 
+  * Recommended
+* Software
+  * Operating System
+    * A Linux distribution with Linux Kernel Version >= 5.14 (Debian Bookworm, Ubuntu 22.04 LTS, CentOS Stream 9, etc.)
+      * Validated:
+        * Ubuntu 22.04 LTS
+  * Shell
+    * A POSIX-Compatible (POSIX.1-2017) Shell Implementation (bash, busybox (ash/hush), dash, fish, ksh, zsh, etc.)
+      * Validated:
+        * Bash 5.2.15
 
 #### Setup
 
