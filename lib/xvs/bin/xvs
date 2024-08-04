@@ -1,9 +1,12 @@
-#! /usr/bin/env sh
+#! sh
 
 set -e
 set -u
 set -x
 
+if [ -z "${__XVS_RUNTIME_STATE-}" ]
+then
+fi
 export __XVS_RUNTIME_STATE="active"
 
 export _XVS_PROFILE_NAME=${XVS_PROFILE-development}

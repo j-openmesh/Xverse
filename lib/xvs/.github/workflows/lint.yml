@@ -4,36 +4,55 @@ on:
   push:
 
 jobs:
-  xvs-shell-shellcheck-bin:
+
+  xvs-checks-sanity-lints-syntax-paths-bin-languages-shell:
+
     name: 'XVS: Lint Bootstrap Shell Scripts with ShellCheck (bin - POSIX Portable Shell Only)'
     runs-on: ubuntu-22.04
+
     steps:
-      - name: Clone Project
-        uses: actions/checkout@v3
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
+
+      - name: Prepare codebase for use
+        # github.com/actions/checkout@v4.1.7 - released: 2024 June 13 (last checked: 2024 August 4)
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+
+      - name: Lint shell code in ./lib/xvs/bin using ShellCheck v0.10.0
+        # github.com/ludeeus/action-shellcheck@v2.0.0 - released: 2023 January 30 (last checked: 2024 August 4)
+        uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38
         with:
           version: 'v0.10.0'
           scandir: './lib/xvs/bin'
+
   xvs-shell-shellcheck-libexec_bootstrap:
+
     name: 'XVS: Lint Bootstrap Shell Scripts with ShellCheck (libexec.bootstrap - POSIX Portable Shell Only)'
     runs-on: ubuntu-22.04
+
     steps:
-      - name: Clone Project
-        uses: actions/checkout@v3
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
+
+      - name: Prepare codebase for use
+        # github.com/actions/checkout@v4.1.7 - released: 2024 June 13 (last checked: 2024 August 4)
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+
         with:
           version: 'v0.10.0'
           scandir: './lib/xvs/lib/libexec.bootstrap'
+          
+
   xvs-shell-shellcheck-libexec:
+
     name: 'XVS: Lint Bootstrap Shell Scripts with ShellCheck (libexec - Isolated Nix-shell Enabled ZSH-compatible Version Pinned Shell Execution Environment)'
     runs-on: ubuntu-22.04
+
     steps:
-      - name: Clone Project
-        uses: actions/checkout@v3
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
+
+      - name: Prepare codebase for use
+        # github.com/actions/checkout@v4.1.7 - released: 2024 June 13 (last checked: 2024 August 4)
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+
+      - name: Lint shell code in ./lib/xvs/bin using ShellCheck v0.10.0
+        # github.com/ludeeus/action-shellcheck@v2.0.0 - released: 2023 January 30 (last checked: 2024 August 4)
+        uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38
         with:
           version: 'v0.10.0'
           scandir: './lib/xvs/lib/libexec'

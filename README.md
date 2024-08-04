@@ -6,7 +6,7 @@ experimentation, and/or research and development.
 
 ### Production Ready? No. Dependable? No. - Not yet; We're working on it :)
 
-Temper your expectations - this project is alpha quality and is under active contstruction.
+Temper your expectations - this project is alpha quality and is under active construction.
 We all try very hard to prevent it but it may, for some unexpected and unpredictable reason,
 destroy your entire machine on a whim. Here be dragons. Take caution. Caveat emptor. Provided
 without any warranty or guarantee. Etc, etc. Basically: unless you understand what you see when
@@ -16,8 +16,8 @@ you look at random files in this project, you'll probably want to avoid it - for
 
 #### Prerequisites
 
-* Any Linux distribution (tested with Ubuntu 22.04)
-* Any POSIX-Compatible Shell Implementation (tested with Bash >=4.1)
+* Any Linux distribution with Linux Version >. 
+* Any POSIX-Compatible (POSIX.1-2017) Shell Implementation (tested with Bash >=4.1)
 
 #### Setup
 
