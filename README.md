@@ -16,14 +16,14 @@ you look at random files in this project, you'll probably want to avoid it - for
 
 #### Prerequisites
 
-* Any Linux distirbution (any distribution released within the last few years should do)
-* A POSIX-Compatible Shell Implementation (tested with Bash >4)
+* Any Linux distribution (tested with Ubuntu 22.04)
+* Any POSIX-Compatible Shell Implementation (tested with Bash >=4.1)
 
 #### Setup
 
-* Clone the repository or download a recent release
-* Ensure your working directory is at the root directory of the project repository
-* Run `./xvs quickstart` and the program will be provide further instruction
+* Use git to clone this repository or download a recent release using your preferred tool and extract
+* Ensure your working directory is the root directory of the project repository and/or extracted archive
+* Run `./xvs quickstart` and the program will provide further instruction
 
 #### Usage
 

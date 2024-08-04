@@ -1,0 +1,41 @@
+---
+on:
+  pull_request:
+  push:
+
+jobs:
+  xvs-shell-shellcheck-bin:
+    name: 'XVS: Lint Bootstrap Shell Scripts with ShellCheck (bin - POSIX Portable Shell Only)'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone Project
+        uses: actions/checkout@v3
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
+        with:
+          version: 'v0.10.0'
+          scandir: './lib/xvs/bin'
+  xvs-shell-shellcheck-libexec_bootstrap:
+    name: 'XVS: Lint Bootstrap Shell Scripts with ShellCheck (libexec.bootstrap - POSIX Portable Shell Only)'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone Project
+        uses: actions/checkout@v3
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
+        with:
+          version: 'v0.10.0'
+          scandir: './lib/xvs/lib/libexec.bootstrap'
+  xvs-shell-shellcheck-libexec:
+    name: 'XVS: Lint Bootstrap Shell Scripts with ShellCheck (libexec - Isolated Nix-shell Enabled ZSH-compatible Version Pinned Shell Execution Environment)'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone Project
+        uses: actions/checkout@v3
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
+        with:
+          version: 'v0.10.0'
+          scandir: './lib/xvs/lib/libexec'
+          SHELLCHECK_OPTS: >-
+            -s zsh
