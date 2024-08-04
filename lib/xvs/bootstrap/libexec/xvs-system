@@ -1,25 +1,44 @@
-#! /usr/bin/env sh
+#! sh
 
 set -e
 set -u
 
-case "${__XVS_RUNTIME_STATE-inactive}" in
-  inactive)
+___XVS_BOOTSTRAP_COMMAND_LOCAL__XVS_SYSTEM__NAME="xvs-system"
+___XVS_BOOTSTRAP_COMMAND_LOCAL__XVS_SYSTEM__EXECUTABLE_PATH="$(readlink "$0" || echo "$0")"
+___XVS_BOOTSTRAP_COMMAND_LOCAL__XVS_SYSTEM__EXECUTABLE_NAME="$(basename "${__XVS_COMMAND_LOCAL__XVS_SYSTEM__EXECUTABLE_PATH}")"
+
+case "${__XVS_RUNTIME_STATE_TRANSITION_CURRENT-initialise}" in
+  initialise)
     __XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH="$(cd "$(dirname "$(readlink "$0" || echo "$0")")" && pwd)"
     __XVS_PROJECT_DIR_PATH="${__XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH}/.."
     __XVS_PROJECT_DIR_BIN_NAME="bin"
-    __XVS_PROJECT_DIR_BIN_PATH=${__XVS_PROJECT_DIR_PATH}/${__XVS_PROJECT_DIR_BIN_NAME}
+    __XVS_PROJECT_DIR_BIN_PATH="${__XVS_PROJECT_DIR_PATH}/${__XVS_PROJECT_DIR_BIN_NAME}"
 
+    export __XVS_RUNTIME_ENTRYPOINT_COMMAND_NAME="${__XVS_COMMAND_LOCAL__XVS_SYSTEM__NAME}"
+    export __XVS_RUNTIME_ENTRYPOINT_COMMAND_PARAMETERS="${@}"
+    export __XVS_RUNTIME_STATE_TRANSITION_CURRENT="route"
     exec ${__XVS_PROJECT_DIR_BIN_PATH}/xvs $@
     ;;
 
-  bootstrapping)
+  route)
+
+    export __XVS_SYSTEM_RUNTIME_ROUTE_HISTORY="${__XVS_SYSTEM_RUNTIME_ROUTE-}:${__XVS_COMMAND_LOCAL__XVS_SYSTEM__NAME}"
+
+    __XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH="$(cd "$(dirname "$(readlink "$0" || echo "$0")")" && pwd)"
+
+    exec ${__XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH}/xvs $@
+
+    ;;
+
+  bootstrap)
     __XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH="$(cd "$(dirname "$(readlink "$0" || echo "$0")")" && pwd)"
 
     exec ${__XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH}/xvs $@
     ;;
 
-  active)
+  start)
+
+  execute)
     ;;
 
   *)
