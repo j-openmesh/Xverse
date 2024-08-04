@@ -17,14 +17,13 @@ you look at random files in this project, you'll probably want to avoid it - for
 #### Requirements
 
 * Internet Access (Unrestricted, Continuous) for on-demand component/dependency downloads
-  * If required, execute `./xvs help system offline` for the steps to remove this requirement. Note that significant 
-    bandwidth and storage required are required to enable fully offline mode.
 * Hardware
-  * Minimum Requirements
+  * Minimum
     * 8GiB RAM
-    * 64GiB NVME/SSD Mass Storage
-    * 
+    * 128GiB NVME/SSD Mass Storage
   * Recommended
+    * 32GiB RAM
+    * 1TiB NVME/SSD Mass Storage
 * Software
   * Operating System
     * A Linux distribution with Linux Kernel Version >= 5.14 (Debian Bookworm, Ubuntu 22.04 LTS, CentOS Stream 9, etc.)

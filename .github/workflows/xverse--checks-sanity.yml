@@ -41,10 +41,12 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
 
       - name: Run ./configure (with no arguments) to generate the (GNU)Makefile at ./Makefile
+        id: run-configure
         run: |-
           ./configure
 
       - name: Ensure the ./Makefile file expected by the GNUMake executable is present in the project root directory ./
+        needs: run-configure
         # github.com/andstor/file-existence-action@v3.0.0 - released: 2024 January 29 (last checked: 2024 August 4)
         uses: andstor/file-existence-action@076e0072799f4942c8bc574a82233e1e4d13e9d6
         with:
