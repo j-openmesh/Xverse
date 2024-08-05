@@ -22,7 +22,7 @@ case "${__XVS_RUNTIME_STATE_TRANSITION_CURRENT-initialise}" in
 
   route)
 
-    export __XVS_SYSTEM_RUNTIME_ROUTE_HISTORY="${__XVS_SYSTEM_RUNTIME_ROUTE-}:${__XVS_COMMAND_LOCAL__XVS_SYSTEM__NAME}"
+    export __XVS_SYSTEM_RUNTIME_ROUTE_HISTORY="${__XVS_SYSTEM_RUNTIME_ROUTE-}:${__XVS_BOOTSTRAP_COMMAND_LOCAL__XVS_SYSTEM__NAME}"
 
     __XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH="$(cd "$(dirname "$(readlink "$0" || echo "$0")")" && pwd)"
 
@@ -37,8 +37,10 @@ case "${__XVS_RUNTIME_STATE_TRANSITION_CURRENT-initialise}" in
     ;;
 
   start)
+    
 
   execute)
+    echo "bootstrap/libexec/xvs-system[execute]: TODO" && exit 2
     ;;
 
   *)

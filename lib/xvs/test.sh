@@ -1,3 +1,0 @@
-# sh
-__XVS_SYSTEM_RUNTIME_ROUTE+=(xvs-system)
-echo __XVS_SYSTEM_RUNTIME_ROUTE

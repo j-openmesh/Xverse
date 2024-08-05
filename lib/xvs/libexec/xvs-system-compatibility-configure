@@ -1,37 +1,12 @@
-#! sh
-## The project provides ./configure exclusively for traditional ./configure, make, make install workflow compatibility.
-## Please use ./xvs directly, if possible. Reference COMPATIBILITY.md in this directory for further information, if available.
-
 #! /usr/bin/env bash
 
 set -e
 set -u
 
-__XVS_SYSTEM_BOOTSTRAP_CACHE_PATH="$(which make)"
-__XVS_SYSTEM_BOOTSTRAP_BUILDER_PROGRAM_PATH="${__XVS_PROJECT_PATH}/Makefile"
+___XVS_DEFINE_COMMAND_NAME="xvs-system-compatibility-configure"
+___XVS_DEFINE_COMMAND_NAMESPACE="xvs/main"
+___XVS_DEFINE_COMMAND_PARENT_COMMAND="xvs-system-compatibility"
 
-if [[ $# -ge 1 ]]
-then
-  exec "${__XVS_SYSTEM_BOOTSTRAP_BUILDER_PATH}" -s -f "${__XVS_SYSTEM_BOOTSTRAP_BUILDER_PROGRAM_PATH}" -C "${__XVS_PROJECT_PATH}" "${1}
-else
-  exec "${__XVS_SYSTEM_BOOTSTRAP_BUILDER_PATH}" -s -f "${__XVS_SYSTEM_BOOTSTRAP_BUILDER_PROGRAM_PATH}" -C "${__XVS_PROJECT_PATH}"
-fi
-
-if [ -z "$(which gnumake)" ]; then
-  __XVS_SYSTEM_COMPATIBILITY_BUILDER_MODE="gnumake"
-  __XVS_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM="Makefile"
-else if [ -z "$(which make)"]; then
-  __XVS_SYSTEM_COMPATIBILITY_BUILDER_MODE="make"
-  __XVS_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM="Makefile"
-else
-  echo "No suitable make utility found. Please see _README.md_." && exit 1
-fi
-fi
-
-__XVS_PROJECT_ROOT_PATH=$(dirname $0)
-__XVS_PROJECT_ROOT_XVS_PATH=${__XVS_PROJECT_ROOT_PATH}/.xvs
-__XVS_PROJECT_ROOT_XVS_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM_BASE_PATH=${__XVS_PROJECT_ROOT_XVS_PATH}/system/builder/compatibility
-__XVS_PROJECT_ROOT_XVS_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM_PATH=${__XVS_PROJECT_ROOT_XVS_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM_BASE_PATH}/project.${__XVS_SYSTEM_COMPATIBILITY_BUILDER_MODE}
-__XVS_PROJECT_ROOT_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM_PATH=${__XVS_PROJECT_ROOT_PATH}/${__XVS_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM}
-
-cp -f ${__XVS_PROJECT_ROOT_XVS_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM_PATH} ${__XVS_PROJECT_ROOT_SYSTEM_COMPATIBILITY_BUILDER_PROGRAM_PATH}
+___XVS_DEFINE_COMMAND_EXECUTABLE_PATH="$(readlink "$0" || echo "$0")"
+___XVS_DEFINE_COMMAND_EXECUTABLE_LOCATION_PATH="$(dirname "${___XVS_DEFINE_COMMAND_EXECUTABLE_PATH}")"
+source "${___XVS_DEFINE_COMMAND_EXECUTABLE_LOCATION_PATH}/.common/define_command.sh"

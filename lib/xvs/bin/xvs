@@ -1,63 +1,154 @@
-#! sh
+#! /bin/sh
 
 set -e
 set -u
 set -x
 
-if [ -z "${__XVS_RUNTIME_STATE-}" ]
-then
-fi
-export __XVS_RUNTIME_STATE="active"
+_XVS_SYSTEM_RUNTIME_ROUTE_HISTORY="${__XVS_SYSTEM_RUNTIME_ROUTE_HISTORY-}""
 
-export _XVS_PROFILE_NAME=${XVS_PROFILE-development}
-export _XVS_SYSTEM_PROFILE_NAME=${XVS_SYSTEM_PROFILE-development}
+_XVS_RUNTIME_STATE_NAME_PREVIOUS="${__XVS_RUNTIME_STATE_NAME_PREVIOUS-_fsm_entrypoint}"
+_XVS_RUNTIME_STATE_NAME_CURRENT="${__XVS_RUNTIME_STATE_NAME_CURRENT-_fsm_entrypoint}"
+_XVS_RUNTIME_STATE_TRANSITION_NAME_PREVIOUS="${__XVS_RUNTIME_STATE_TRANSITION_NAME_PREVIOUS-_fsm_entrypoint}"
+_XVS_RUNTIME_STATE_TRANSITION_NAME_NEXT="${__XVS_RUNTIME_STATE_TRANSITION_NAME_NEXT-_fsm_entrypoint}"
+
+_XVS_RUNTIME_ROUTE_HISTORY="${__XVS_RUNTIME_ROUTE_HISTORY}"
+
+function ___xvs_runtime_log() {
+  local LEVEL="{$1}"
+  local MESSAGE="{$2}"
+  echo "XVS_RUNTIME[][...->${_XVS_RUNTIME_STATE_TRANSITION_NAME_PREVIOUS}->[${_XVS_COMMAND_STATE_NAME_CURRENT}]->${_XVS_RUNTIME_STATE_TRANSITION_NAME_NEXT}]:[${LEVEL}] ${MESSAGE}" >&2
+}
+
+function ___xvs_runtime_log_fatal() {
+  local EXIT_CODE="${1}"
+  local MESSAGE="${2}"
+  ___xvs_runtime_log "FATAL" "${2}"
+  export >&2
+  exit ${EXIT_CODE}
+}
 
 export __XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH=$((${_XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH-0}+1))
-export _XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH=${__XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH}
+_XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH=${__XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH}
 
-if [ ${_XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH} -gt 1023 ]; then
-  echo "Error: execution recursion depth limit exceeded"
-  exit 254
+if [ ${_XVS_SYSTEM_RUNTIME_STATE_EXECUTION_RECURSION_DEPTH} -gt 31 ]; then
+  ___xvs_runtime_log_fatal 254 "Execution recursion depth limit exceeded"
 fi
 
-export __XVS_PROJECT_DIR_BIN_PATH="$(cd "$(dirname "$(readlink "$0" || echo "$0")")" && pwd)"
+case "${_XVS_RUNTIME_STATE_NAME_CURRENT}" in
 
-export __XVS_PROJECT_DIR_PATH="${__XVS_PROJECT_DIR_BIN_PATH}/.."
+  _fsm_entrypoint)
 
-export __XVS_PROJECT_DIR_LIBEXEC_NAME="libexec"
-export __XVS_PROJECT_DIR_LIBEXEC_PATH="${__XVS_PROJECT_DIR_PATH}/${__XVS_PROJECT_DIR_LIBEXEC_NAME}"
+    case "${_XVS_RUNTIME_STATE_TRANSITION_NEXT}" in
 
-export __XVS_PROJECT_BOOTSTRAP_DIR_ROOT_NAME="bootstrap"
-export __XVS_PROJECT_BOOTSTRAP_DIR_ROOT_PATH="${__XVS_PROJECT_DIR_LIBEXEC_PATH}/${__XVS_PROJECT_BOOTSTRAP_DIR_ROOT_NAME}"
+      _fsm_entrypoint)
+        ___xvs_runtime_log_fatal 129 "Implementation Undefined"
+        ;;
 
-export __XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_NAME="libexec"
-export __XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH="${__XVS_PROJECT_DIR_ROOT_PATH}/${__XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_NAME}"
+      *)
+        ;;
 
-export __XVS_PROJECT_DIR_XVS_PATH="${__XVS_PROJECT_DIR_PATH}/.xvs"
-export __XVS_PROJECT_DIR_XVS_SYSTEM_PATH="${__XVS_PROJECT_DIR_XVS_PATH}/system"
-export __XVS_PROJECT_DIR_XVS_SYSTEM_TARGET_PATH="${__XVS_PROJECT_DIR_XVS_SYSTEM_PATH}/target"
+    esac
 
-export __XVS_TARGET_DIR_PATH="$(dirname "$0")"
+  uninitialised)
 
-export __XVS_TARGET_DIR_XVS_NAME=".xvs"
-export __XVS_TARGET_DIR_XVS_PATH="${__XVS_TARGET_DIR_PATH}/${__XVS_TARGET_DIR_XVS_NAME}"
+    case "${_XVS_RUNTIME_STATE_TRANSITION_NEXT}" in
 
-export __XVS_TARGET_DIR_XVS_LOCAL_NAME="local"
-export __XVS_TARGET_DIR_XVS_LOCAL_PATH="${__XVS_TARGET_DIR_XVS_PATH}/${__XVS_TARGET_DIR_XVS_LOCAL_NAME}"
+      bootstrap)
+        ___xvs_runtime_log_fatal 129 "Implementation Undefined"
+        ;;
 
-export __XVS_TARGET_DIR_XVS_SYSTEM_NAME="system"
-export __XVS_TARGET_DIR_XVS_SYSTEM_PATH="${__XVS_TARGET_DIR_XVS_PATH}/${__XVS_TARGET_DIR_XVS_SYSTEM_NAME}"
+      initialise)
+        ___xvs_runtime_log_fatal 129 "Implementation Undefined"
+        ;;
 
-export __XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_NAME="control"
-export __XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_PATH="${__XVS_TARGET_DIR_XVS_SYSTEM_PATH}/${__XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_NAME}"
+      *)
+        ___xvs_runtime_log_fatal 130 "Invalid State Transition"
+        ;;
 
-export __XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_NAME="bootstrap"
-export __XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_PATH="${__XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_PATH}/${__XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_NAME}"
+    esac
+    ;;
+
+  bootstrapped)
+
+  initialised)
+
+    case "${_XVS_RUNTIME_STATE_TRANSITION_NAME_NEXT}" in
+
+      route)
+        ___xvs_runtime_log_fatal 129 "Implementation Undefined"
+        ;;
+
+      *)
+        ___xvs_runtime_log_fatal 130 "Invalid State Transition"
+        ;;
+
+    esac
+    ;;
+
+  executing)
+
+    case "${_XVS_RUNTIME_STATE_TRANSITION_NEXT}" in
+
+      succeed)
+        ___xvs_runtime_log_fatal 129 "Implementation Undefined"
+        ;;
+
+      fail)
+        ___xvs_runtime_log_fatal 129 "Implementation Undefined"
+        ;;
+
+      *)
+        ___xvs_runtime_log_fatal 130 "Invalid State Transition"
+        ;;
+
+    esac
+    ;;
+
+  *)
+    ___xvs_command_log_fatal 131 "Invalid Current State Reached. This is a bug in the state transition pre-transition destination validity check."
+    ;;
+
+esac
+
+
+export __XVS_PROJECT_LOCATION_BIN_PATH="$(cd "$(dirname "$(readlink "$0" || echo "$0")")" && pwd)"
+
+export __XVS_PROJECT_LOCATION_PATH="${__XVS_PROJECT_LOCATION_BIN_PATH}/.."
+
+export __XVS_PROJECT_LOCATION_LIBEXEC_NAME="libexec"
+export __XVS_PROJECT_LOCATION_LIBEXEC_PATH="${__XVS_PROJECT_LOCATION_PATH}/${__XVS_PROJECT_LOCATION_LIBEXEC_NAME}"
+
+export __XVS_PROJECT_BOOTSTRAP_LOCATION_ROOT_NAME="bootstrap"
+export __XVS_PROJECT_BOOTSTRAP_LOCATION_ROOT_PATH="${__XVS_PROJECT_LOCATION_LIBEXEC_PATH}/${__XVS_PROJECT_BOOTSTRAP_LOCATION_ROOT_NAME}"
+
+export __XVS_PROJECT_BOOTSTRAP_LOCATION_LIBEXEC_NAME="libexec"
+export __XVS_PROJECT_BOOTSTRAP_LOCATION_LIBEXEC_PATH="${__XVS_PROJECT_LOCATION_PATH}/${__XVS_PROJECT_BOOTSTRAP_LOCATION_LIBEXEC_NAME}"
+
+export __XVS_PROJECT_LOCATION_XVS_PATH="${__XVS_PROJECT_LOCATION_PATH}/.xvs"
+export __XVS_PROJECT_LOCATION_XVS_SYSTEM_PATH="${__XVS_PROJECT_LOCATION_XVS_PATH}/system"
+export __XVS_PROJECT_LOCATION_XVS_SYSTEM_TARGET_PATH="${__XVS_PROJECT_LOCATION_XVS_SYSTEM_PATH}/target"
+
+export __XVS_TARGET_LOCATION_PATH="$(dirname "$0")"
+
+export __XVS_TARGET_LOCATION_XVS_NAME=".xvs"
+export __XVS_TARGET_LOCATION_XVS_PATH="${__XVS_TARGET_LOCATION_PATH}/${__XVS_TARGET_LOCATION_XVS_NAME}"
+
+export __XVS_TARGET_LOCATION_XVS_LOCAL_NAME="local"
+export __XVS_TARGET_LOCATION_XVS_LOCAL_PATH="${__XVS_TARGET_LOCATION_XVS_PATH}/${__XVS_TARGET_LOCATION_XVS_LOCAL_NAME}"
+
+export __XVS_TARGET_LOCATION_XVS_SYSTEM_NAME="system"
+export __XVS_TARGET_LOCATION_XVS_SYSTEM_PATH="${__XVS_TARGET_LOCATION_XVS_PATH}/${__XVS_TARGET_LOCATION_XVS_SYSTEM_NAME}"
+
+export __XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_NAME="control"
+export __XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_PATH="${__XVS_TARGET_LOCATION_XVS_SYSTEM_PATH}/${__XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_NAME}"
+
+export __XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_NAME="bootstrap"
+export __XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_PATH="${__XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_PATH}/${__XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_NAME}"
 
 export __XVS_RUNTIME_STATE_EXECUTED_EXECUTABLE_NAME="$(basename ${0})"
 
-if [ "${_XVS_SYSTEM_PROFILE_NAME}" = "development" ] || [ ! -f "${__XVS_TARGET_DIR_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_PATH}" ]; then
-  exec "${__XVS_PROJECT_BOOTSTRAP_DIR_LIBEXEC_PATH}/${__XVS_RUNTIME_STATE_EXECUTED_EXECUTABLE_NAME}" $@
+if [ "${_XVS_SYSTEM_PROFILE_NAME}" = "development" ] || [ ! -f "${__XVS_TARGET_LOCATION_XVS_SYSTEM_CONTROL_BOOTSTRAP_FLAG_PATH}" ]; then
+  exec "${__XVS_PROJECT_BOOTSTRAP_LOCATION_LIBEXEC_PATH}/${__XVS_RUNTIME_STATE_EXECUTED_EXECUTABLE_NAME}" $@
 fi
 
-exec ${__XVS_PROJECT_LIBEXEC_PATH}/${__XVS_RUNTIME_STATE_EXECUTED_EXECUTABLE_NAME} $@
+exec "${__XVS_PROJECT_LIBEXEC_PATH}/${__XVS_RUNTIME_STATE_EXECUTED_EXECUTABLE_NAME}" $@
