@@ -2,16 +2,11 @@
 
 set -e
 set -u
-set -x
-
-_XVS_SYSTEM_RUNTIME_ROUTE_HISTORY="${__XVS_SYSTEM_RUNTIME_ROUTE_HISTORY-}""
 
 _XVS_RUNTIME_STATE_NAME_PREVIOUS="${__XVS_RUNTIME_STATE_NAME_PREVIOUS-_fsm_entrypoint}"
 _XVS_RUNTIME_STATE_NAME_CURRENT="${__XVS_RUNTIME_STATE_NAME_CURRENT-_fsm_entrypoint}"
 _XVS_RUNTIME_STATE_TRANSITION_NAME_PREVIOUS="${__XVS_RUNTIME_STATE_TRANSITION_NAME_PREVIOUS-_fsm_entrypoint}"
 _XVS_RUNTIME_STATE_TRANSITION_NAME_NEXT="${__XVS_RUNTIME_STATE_TRANSITION_NAME_NEXT-_fsm_entrypoint}"
-
-_XVS_RUNTIME_ROUTE_HISTORY="${__XVS_RUNTIME_ROUTE_HISTORY}"
 
 function ___xvs_runtime_log() {
   local LEVEL="{$1}"
@@ -23,7 +18,7 @@ function ___xvs_runtime_log_fatal() {
   local EXIT_CODE="${1}"
   local MESSAGE="${2}"
   ___xvs_runtime_log "FATAL" "${2}"
-  export >&2
+  declare -p >&2
   exit ${EXIT_CODE}
 }
 
