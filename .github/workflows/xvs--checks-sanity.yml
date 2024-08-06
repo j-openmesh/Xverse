@@ -6,7 +6,6 @@ on:
 jobs:
   xvs--checks-sanity--properties-paths--in_paths-bin--only-expected-executables-exist:
     name: 'XVS: Sanity check for the presence of only expected executables within the end-user visible path'
-    id: properties-only-expected-executables-exist-in-bin
 
     runs-on: ubuntu-22.04
 
@@ -30,7 +29,7 @@ jobs:
   xvs--checks-sanity--heuristics-syntax--in_paths-bin--languages-shell_posix:
     name: 'XVS: Sanity check using heuristics (form, usage, portability) for end-user PATH intended executables (in the shell/POSIX language)'
 
-    needs: properties-only-expected-executables-exist-in-bin
+    needs: xvs--checks-sanity--properties-paths--in_paths-bin--only-expected-executables-exist
     runs-on: ubuntu-22.04
 
     steps:
@@ -38,7 +37,7 @@ jobs:
         # github.com/actions/checkout@v4.1.7 - released: 2024 June 13 (last checked: 2024 August 4)
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
 
-      - name: "Lint shell code in ./lib/xvs/bin using ShellCheck v0.10.0
+      - name: "Lint shell code in ./lib/xvs/bin using ShellCheck v0.10.0"
         # github.com/ludeeus/action-shellcheck@v2.0.0 - released: 2023 January 30 (last checked: 2024 August 4)
         uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38
         with:
